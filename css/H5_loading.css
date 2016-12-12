@@ -1,0 +1,63 @@
+/*loading动画样式*/
+
+body{				/*为了让loading垂直居中,而body无法增加高度*/
+	position: fixed;
+	width: 100%;
+	height: 100%;
+}
+
+.loading{
+	width:60px;
+	height: 60px;
+	position: relative;
+	margin: -30px auto;
+	top: 50%;
+}
+
+.loading #rate{
+	font-size: 9px;
+	width: 100%;
+	text-align: center;
+	height: 20px;
+	line-height: 20px;
+	color: #0062e0;
+	position: absolute;
+	top:100%;
+}
+
+.double-bounce1,.double-bounce2{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background-color: #0062e0;
+	left: 0;
+	top: 0;
+	position: absolute;
+	opacity: .6;
+}
+
+.double-bounce1{
+	-webkit-animation: bounce1 2s infinite ease-in-out 0s;		/*动画名   执行动画总共时间  循环次数  渐入渐出   延迟*/
+}
+
+.double-bounce2{
+	-webkit-animation: bounce2 2s infinite ease-in-out 0s;
+}
+
+@-webkit-keyframes bounce1{		/*定义动画*/
+	0%,100%{
+		transform: scale(0);			/*缩放*/
+	}
+	50%{
+		transform: scale(1);
+	}
+}
+
+@-webkit-keyframes bounce2{		/*定义动画*/
+	0%,100%{
+		transform: scale(1);			/*缩放*/
+	}
+	50%{
+		transform: scale(0);
+	}
+}

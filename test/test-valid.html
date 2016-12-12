@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<style>
+			body{
+				margin: 0;
+				padding: 0;
+			}
+			.component{
+				width: 50%;
+				height: 50px;
+				margin-bottom: 20px;
+				background: #eee;
+				display:none;
+			}
+		</style>
+		<script type="text/javascript" src="../js/lib/jquery.js"></script>
+		<script type="text/javascript" src="../js/lib/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="../js/lib/jquery.fullPage.js"></script>
+		<script type="text/javascript">		//当页面载入完成之后再写代码
+			$(function(){
+				$('#h5').fullpage({
+					'sectionsColor':['#254875','#00FF00','red'],			//设置每页颜色
+					onLeave:function(index,nextIndex,direction){
+						$('#h5').find('.page').eq(index-1).trigger('onLeave')		
+						//find()  当前元素集合中某个元素；eq()  下标的作用，选择第几个元素；trigger() 方法触发被选元素的指定事件类型。
+						//page从1开始算起，所以写index-1
+					},
+					afterLoad:function(anchorLink,index){		//锚链接的名称，序号
+						$('#h5').find('.page').eq(index-1).trigger('onLoad')
+					}
+				});
+				
+				$('.page').on('onLeave',function(){
+//					console.log($(this).attr('id'),'==>>','onleave');
+					$(this).find('.component').trigger('onLeave');		//方法2: 不用trigger，防止冒泡发生死循环，triggerHander不会传播
+				})
+				
+				$('.page').on('onLoad',function(){
+//					console.log($(this).attr('id'),'==>>','onload');
+					$(this).find('.component').trigger('onLoad');
+				})
+				
+				$('component').on('onLoad',function(){
+					$(this).fadeIn();		//把component样式设置为display：none;
+					return false;			//方法1: 防止冒泡，阻止向上传播
+				})
+				$('component').on('onLeave',function(){
+					$(this).fadeOut();
+					return false;			//方法1: 防止冒泡，阻止向上传播
+				})
+			});
+		</script>
+	</head>
+	<body>
+		<!--  用于验证fullpage.js 切换页面，以及内容结构可用，组件能够进行动画-->
+		<div id="h5">
+			<div class="page section" id="page-1">			 <!--每一个session对应一个页面-->
+				<div class="component log">logo</div>
+			    <div class="component slogan">slogan</div>
+			</div>
+			<div class="page section" id="page-2">
+				<div class="component desc">desc</div>
+			</div>
+			<div class="page section" id="page-3">
+				<div class="component bar">bar</div>
+			</div>
+		</div>
+	</body>
+</html>

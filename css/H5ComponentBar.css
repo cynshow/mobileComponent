@@ -1,0 +1,64 @@
+/* 柱状组件样式 */
+.h5_component_bar{	
+}
+
+.h5_component_bar .line{	
+	height: 15px;
+	font-size: 12px;
+	line-height: 15px;
+	margin-bottom: 15px;
+}
+
+.h5_component_bar .name{	
+	width: 60px;
+	float: left;
+	color: #000;
+	text-align: center;
+	position: absolute;		/*柱状图为100%不会下移的解决方式：让组件宽度为rate进度条的宽度*/
+	left: -60px;
+}
+
+.h5_component_bar .rate{
+	height: 15px;	
+	margin-left: 5px;
+	float: left;
+	position: relative;		/*后续要定义rate背景颜色*/
+}
+
+.h5_component_bar .rate .bg{
+	background-color:#99c0ff ;
+	width: 0%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	border-radius: 3px;
+}
+
+.h5_component_bar .per{
+	width: 20px;
+	color: #99c0ff;
+	margin-left: 5px;
+	float: left;
+	position: absolute;		/*柱状图为100%不会下移的解决方式*/
+	right: -25px;
+	-webkit-opacity:0;
+}
+
+.h5_component_bar_load .rate .bg{
+	-webkit-transition: all 1s .5s;		/*任何属性变更都有1秒的过渡效果*/
+	width: 100%;
+}
+
+.h5_component_bar_leave .rate .bg{
+	width: 0%;
+}
+
+.h5_component_bar_load .per{
+	-webkit-transition: all 1s 1.5s;		/*最后一个1s是指延迟时间*/
+	-webkit-opacity:1;		/*加webkit提醒有些样式不是所有浏览器都通用的，搜索兼容性css写法*/
+}
+
+.h5_component_bar_leave .per{
+	-webkit-opacity:0;
+}
